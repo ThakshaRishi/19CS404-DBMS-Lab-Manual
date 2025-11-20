@@ -105,51 +105,76 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+In the Products table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
 
-```sql
+ProductID Name Category Price Stock
+
+106 Fitness Tracker Wearables 107 Laptop Electronics 999.99 50 108 Wireless Earbuds Accessories 100
+```
+insert into Products(ProductID,Name,Category,Price,Stock)
+values(106,"Fitness Tracker","Wearables",NULL,NULL);
+insert into Products(ProductID,Name,Category,Price,Stock) 
+values(107,"Laptop","Electronic",999.99,50);
+insert into Products(ProductID,Name,Category,Price,Stock) 
+values(108,"Wireless Earbud","Accessorie",NULL,100); 
 -- Paste your SQL code below for Question 1
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1174" height="266" alt="image" src="https://github.com/user-attachments/assets/4367af72-6730-4f1f-bde1-16aa8637e805" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Write a SQL Query to add attribute ISBN as varchar(30) and domain_dept as varchar(30) in the table 'books'
 
-```sql
--- Paste your SQL code below for Question 2
+```
+alter table books add  ISBN varchar(30);
+alter table books add domain_dept  varchar(30);
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1178" height="378" alt="image" src="https://github.com/user-attachments/assets/68bd7ec9-57ec-4c1e-8d85-8695fe6d1b64" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+Insert a customer with CustomerID 301, Name Michael Jordan, Address 123 Maple St, City Chicago, and ZipCode 60616 into the Customers table.
 
-```sql
--- Paste your SQL code below for Question 3
+```
+insert into Customers(CustomerID,Name,Address,City,ZipCode)
+values(301,"Michael Jordan","123 Maple St","Chicago",60616);
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1184" height="229" alt="image" src="https://github.com/user-attachments/assets/650bada8-65e7-4faa-8d2d-c9d1e546c724" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+Create a new table named contacts with the following specifications: contact_id as INTEGER and primary key. first_name as TEXT and not NULL. last_name as TEXT and not NULL. email as TEXT. phone as TEXT and not NULL with a check constraint to ensure the length of phone is at least 10 characters.
 
-```sql
--- Paste your SQL code below for Question 4
+```
+create table contacts(
+contact_id  INTEGER  primary key,
+first_name  TEXT not NULL,
+last_name  TEXT  not NULL,
+email  TEXT,
+phone  TEXT  not NULL  check(LENGTH(phone)>=10) 
+
+
+);
+
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1192" height="323" alt="image" src="https://github.com/user-attachments/assets/489ef3ed-ec0b-460c-8d7f-4b0437ae711c" />
+
 
 **Question 5**
 ---
