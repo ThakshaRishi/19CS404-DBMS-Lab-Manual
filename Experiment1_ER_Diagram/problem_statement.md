@@ -25,6 +25,8 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 *Paste or attach your diagram here*  
 ![ER Diagram](er_diagram_fitness.png)
 
+<img width="981" height="704" alt="image" src="https://github.com/user-attachments/assets/a1ac6074-4c46-413c-8cdb-8fca0d4e7896" />
+
 ### Entities and Attributes
 
 | Entity | Attributes (PK, FK) | Notes |
@@ -66,6 +68,8 @@ The Central Library wants to manage book lending and cultural events.
 ### ER Diagram:
 *Paste or attach your diagram here*  
 ![ER Diagram](er_diagram_library.png)
+
+<img width="832" height="636" alt="image" src="https://github.com/user-attachments/assets/4cd40594-a25c-4cf1-84eb-94e85eeb1b6d" />
 
 ### Entities and Attributes
 
@@ -109,15 +113,18 @@ A popular restaurant wants to manage reservations, orders, and billing.
 *Paste or attach your diagram here*  
 ![ER Diagram](er_diagram_restaurant.png)
 
-### Entities and Attributes
+<img width="835" height="696" alt="image" src="https://github.com/user-attachments/assets/796fd0f8-1a5e-48c4-b353-d81640426f5f" />
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+| **Entity**         | **Attributes (PK, FK)**                                        | **Notes**                                                     |
+| ------------------ | -------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Member**         | **MemberID (PK)**, Name, Email                                 | A member can make loans and attend events.                    |
+| **Loan**           | **LoanID (PK)**, BorrowDate, LoanExpiryDate, **MemberID (FK)** | A loan is made by one member and covers one book.             |
+| **Book**           | **ISBN (PK)**, Name, Author                                    | A book can be part of many loans.                             |
+| **Fine**           | **FineID (PK)**, Amount, DateExceeded, **LoanID (FK)**         | A fine is generated when a loan exceeds expiry.               |
+| **Event**          | **EventID (PK)**, Date, Time, Venue                            | Members attend events; events use rooms.                      |
+| **Rooms**          | **RoomNumber (PK)**, Capacity, Availability                    | Rooms are used for events and host an author/speaker session. |
+| **Author/Speaker** | **SpeakerID (PK)**, Name, GenreFocus                           | Conducts events in rooms.                                     |
+
 
 ### Relationships and Constraints
 
