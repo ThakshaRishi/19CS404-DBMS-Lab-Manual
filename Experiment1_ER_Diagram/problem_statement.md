@@ -72,29 +72,44 @@ The Central Library wants to manage book lending and cultural events.
 <img width="832" height="636" alt="image" src="https://github.com/user-attachments/assets/4cd40594-a25c-4cf1-84eb-94e85eeb1b6d" />
 
 ### Entities and Attributes
+| **Entity**         | **Attributes (PK, FK)**                                        | **Notes**                                                     |
+| ------------------ | -------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Member**         | **MemberID (PK)**, Name, Email                                 | A member can make loans and attend events.                    |
+| **Loan**           | **LoanID (PK)**, BorrowDate, LoanExpiryDate, **MemberID (FK)** | A loan is made by one member and covers one book.             |
+| **Book**           | **ISBN (PK)**, Name, Author                                    | A book can be part of many loans.                             |
+| **Fine**           | **FineID (PK)**, Amount, DateExceeded, **LoanID (FK)**         | A fine is generated when a loan exceeds expiry.               |
+| **Event**          | **EventID (PK)**, Date, Time, Venue                            | Members attend events; events use rooms.                      |
+| **Rooms**          | **RoomNumber (PK)**, Capacity, Availability                    | Rooms are used for events and host an author/speaker session. |
+| **Author/Speaker** | **SpeakerID (PK)**, Name, GenreFocus                           | Conducts events in rooms.                                     |
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
 
 ### Relationships and Constraints
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+| **Relationship**                     | **Cardinality** | **Participation**                    | **Notes**                                                              |
+| ------------------------------------ | --------------- | ------------------------------------ | ---------------------------------------------------------------------- |
+| **Member – Makes – Loan**            | 1 : M           | Member (mandatory), Loan (mandatory) | One member can make many loans; each loan belongs to one member.       |
+| **Loan – Covers – Book**             | M : 1           | Loan (mandatory), Book (mandatory)   | A loan covers exactly one book; a book can appear in multiple loans.   |
+| **Loan – Generates – Fine**          | 1 : M           | Loan (optional), Fine (mandatory)    | A loan may generate zero or many fines; each fine belongs to one loan. |
+| **Member – Attends – Event**         | M : M           | Both optional                        | Members can attend many events; events have many attendees.            |
+| **Event – Use – Rooms**              | M : 1           | Event (mandatory), Rooms (optional)  | An event uses one room; a room can host many events.                   |
+| **Rooms – Conduct – Author/Speaker** | 1 : 1           | Both mandatory                       | One author/speaker conducts an event in exactly one room at a time.    |
+
 
 ### Assumptions
-- 
-- 
-- 
 
----
+Each loan is strictly linked to one book (not multiple books per loan).
+
+A member can exist without creating loans or attending events.
+
+Fines only exist if a loan has exceeded its expiry date.
+
+Every event must be held in a room.
+
+Author/Speaker is treated as its own entity, not part of Member.
+
+Each event has one speaker, and each speaker conducts one event at a time.
+
+Room availability indicates whether the room can host events.
 
 # Scenario C: Restaurant Table Reservation & Ordering
 
@@ -115,15 +130,7 @@ A popular restaurant wants to manage reservations, orders, and billing.
 
 <img width="835" height="696" alt="image" src="https://github.com/user-attachments/assets/796fd0f8-1a5e-48c4-b353-d81640426f5f" />
 
-| **Entity**         | **Attributes (PK, FK)**                                        | **Notes**                                                     |
-| ------------------ | -------------------------------------------------------------- | ------------------------------------------------------------- |
-| **Member**         | **MemberID (PK)**, Name, Email                                 | A member can make loans and attend events.                    |
-| **Loan**           | **LoanID (PK)**, BorrowDate, LoanExpiryDate, **MemberID (FK)** | A loan is made by one member and covers one book.             |
-| **Book**           | **ISBN (PK)**, Name, Author                                    | A book can be part of many loans.                             |
-| **Fine**           | **FineID (PK)**, Amount, DateExceeded, **LoanID (FK)**         | A fine is generated when a loan exceeds expiry.               |
-| **Event**          | **EventID (PK)**, Date, Time, Venue                            | Members attend events; events use rooms.                      |
-| **Rooms**          | **RoomNumber (PK)**, Capacity, Availability                    | Rooms are used for events and host an author/speaker session. |
-| **Author/Speaker** | **SpeakerID (PK)**, Name, GenreFocus                           | Conducts events in rooms.                                     |
+
 
 
 ### Relationships and Constraints
